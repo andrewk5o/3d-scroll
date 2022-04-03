@@ -1,0 +1,141 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+:root {
+  --index: calc(1vw + 1vh);
+  --gutter: 30px;
+  --sideSmall: 26;
+  --sideBig: 36;
+  --depth: 5000px;
+  --transition: .75s cubic-bezier(.075, .5, 0, 1);
+}
+
+@font-face {
+  font-family: raleway_c;
+  src: url(../assets/fonts/raleway-v22-cyrillic-300.woff2);
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: railway_c;
+  src: url(../assets/fonts/raleway-v22-cyrillic-100.woff2);
+  font-weight: 100;
+}
+
+body {
+  background: #000;
+  color: #fff;
+  font-size: calc(var(--index) * .8);
+  font-family: railway_c, sans-serif;
+  line-height: 1.75;
+  font-weight: 300;
+  height: var(--depth);
+  scrollbar-width: 0;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  perspective: 1500px;
+}
+
+.gallery {
+  transform-style: preserve-3d;
+  height: 100%;
+}
+
+.frame {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: grid;
+  place-items: center;
+  transition: var(--transition), opacity .75s ease;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+h1, h2, h3, h4 {
+  font-weight: 100;
+  text-transform: uppercase;
+  width: min-content;
+  line-height: 1;
+}
+
+.frame h2 {
+  text-align: center;
+  font-size: calc(var(--index) * 3.3);
+}
+
+.frame__media {
+  position: relative;
+  width: calc(var(--index) * var(--sideSmall));
+  height: calc(var(--index) * var(--sideBig));
+  background-position: center;
+  background-size: cover;
+}
+
+.frame__media__left {
+  right: calc(var(--sideSmall) / 2 * var(--index) + var(--gutter));
+}
+
+.frame__media__right {
+  left: calc(var(--sideSmall) / 2 * var(--index) + var(--gutter));
+}
+
+.frame__bg {
+  background-color: rgb(0 0 0 / .8);
+}
+
+video.frame__media {
+  width: calc(var(--index) * var(--sideBig));
+  height: calc(var(--index) * var(--sideSmall));
+}
+
+video.frame__media__right {
+  left: calc(var(--sideBig) / 2 * var(--index) + var(--gutter));
+}
+
+video.frame__media__left {
+  right: calc(var(--sideBig) / 2 * var(--index) + var(--gutter));
+}
+
+.text-left > * {
+  position: relative;
+  right: 18vw;
+}
+
+.text-right > * {
+  position: relative;
+  left: 18vw;
+}
+
+.frame h3 {
+  font-size: calc(var(--index) * 3);
+}
+
+.frame p {
+  max-width: 30vw;
+  margin-top: 5vh;
+}
+
+.soundButton {
+  position: fixed;
+  bottom: 5vh;
+  right: 5vw;
+  cursor: pointer;
+  width: 24px;
+  transition: .25s ease;
+}
+
+.soundButton.paused {
+  opacity: .25;
+}
